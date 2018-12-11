@@ -305,7 +305,7 @@ mpl.figure.prototype.request_resize = function(x_pixels, y_pixels) {
 mpl.figure.prototype.send_message = function(type, properties) {
     properties['type'] = type;
     properties['figure_id'] = this.id;
-    // this.ws.send(JSON.stringify(properties));
+    this.ws.send(JSON.stringify(properties));
 }
 
 mpl.figure.prototype.send_draw_message = function() {
@@ -552,8 +552,3 @@ mpl.figure.prototype.toolbar_button_onclick = function(name) {
 mpl.figure.prototype.toolbar_button_onmouseover = function(tooltip) {
     this.message.textContent = tooltip;
 };
-mpl.toolbar_items = [["Home", "Reset original view", "ui-icon ui-icon-home", "home"], ["Back", "Back to previous view", "ui-icon ui-icon-circle-arrow-w", "back"], ["Forward", "Forward to next view", "ui-icon ui-icon-circle-arrow-e", "forward"], ["", "", "", ""], ["Pan", "Pan axes with left mouse, zoom with right", "ui-icon ui-icon-arrow-4", "pan"], ["Zoom", "Zoom to rectangle", "ui-icon ui-icon-search", "zoom"], ["", "", "", ""], ["Download", "Download plot", "ui-icon ui-icon-disk", "download"]];
-
-mpl.extensions = ["eps", "pdf", "png", "ps", "raw", "svg"];
-
-mpl.default_extension = "png";

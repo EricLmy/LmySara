@@ -20,7 +20,9 @@ def create_figure():
 def index(request):
 	figure = create_figure()
 	manager = new_figure_manager_given_figure(id(figure), figure)
-	context = {'fig_id': manager.num}
-	
+	context = {'ws_uri':"/Math_Sin/",'fig_id': manager.num}
+	print("--------------")
+	print(request)
+	print("--------------")
 	return render(request, 'Math_Sin/index.html', context)
 

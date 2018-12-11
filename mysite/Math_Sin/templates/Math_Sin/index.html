@@ -2,21 +2,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/page.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/boilerplate.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/fbm.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'jquery/css/themes/base/jquery-ui.min.css' %}">
-	<script src="{% static 'jquery/js/jquery-1.11.3.min.js' %}"></script>
-	<script src="{% static 'jquery/js/jquery-ui.min.js' %}"></script>
-	<script src="{% static 'mpl.js' %}"></script>
-	<script>
-      /* This is a callback that is called when the user saves
+  <link rel="stylesheet" type="text/css" href="{% static 'css/page.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/boilerplate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/fbm.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'jquery/css/themes/base/jquery-ui.min.css' %}">
+  <script src="{% static 'jquery/js/jquery-1.11.3.min.js' %}"></script>
+  <script src="{% static 'jquery/js/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'js/mpl.js' %}"></script>
+  <script>
+      $(document).ready(
+        function() {
+          var websocket_type = mpl.get_websocket_type();
+          var websocket = new websocket_type("ws://192.168.239.131:8081/Math_Sin/");
+          websocket.onopen = function(event) {
+          };
+          websocket.onmessage = function(event) {
+          }
+          websocket.onclose = function(event) {
+          }
+
+          var mpl_ondownload = 0;
+          var fig = new mpl.figure(
+              {{ fig_id }}, 
+              websocket, 
+              mpl_ondownload, 
+              $('div#figure'));
+        }
+      );
+  </script>
+<!--   <script>
+        /* This is a callback that is called when the user saves
          (downloads) a file.  Its purpose is really to map from a
          figure and file format to a url in the application. */
       function ondownload(figure, format) {
         // window.open('download.' + format, '_blank');
       };
-
       $(document).ready(
         function() {
           /* It is up to the application to provide a websocket that the figure
@@ -25,7 +45,6 @@
              from multiple figures, if necessary. */
           // var websocket_type = mpl.get_websocket_type();
           var websocket = 0;
-
           // mpl.figure creates a new figure on the webpage.
           var fig = new mpl.figure(
               // A unique numeric identifier for the figure
@@ -38,12 +57,12 @@
               $('div#figure'));
         }
       );
-    </script>
-	<title>LmySara</title>
+    </script> -->
+  <title>LmySara</title>
 </head>
 <body>
-	<h1>nihao .微量元素111</h1>
-	<div id="figure">
+  <h1>nihao .微量元素111</h1>
+  <div id="figure">
     </div>
 </body>
 </html>

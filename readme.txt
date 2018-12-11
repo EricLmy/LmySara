@@ -9,3 +9,6 @@ add app and python3 manage.py makemigations
 
 
 pip3 install tornado
+
+
+/usr/lib/python3/dist-packages/matplotlib/backends/web_backend
