@@ -7,7 +7,7 @@
     <script src="_static/jquery/js/jquery-1.11.3.min.js"></script>
     <script src="_static/jquery/js/jquery-ui.min.js"></script>
     <script src="mpl.js"></script>
-    <script src="static/index.js"></script>
+    <script src="static/lines.js"></script>
     <script>
       function ondownload(figure, format) {
         window.open('download.' + format, '_blank');
@@ -35,5 +35,10 @@
     </div>
     <p id="demo">hahahah</p>
     <button type="button" onclick="myFunction()">点击这里</button>
+    <form action="lines" method="post">
+      <input type="text" placeholder="Account" name="account">
+      <input type="password" placeholder="passwd" name="passwd">
+      <input type="submit">
+    </form>
   </body>
 </html>

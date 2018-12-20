@@ -16,15 +16,16 @@ class Application(tornado.web.Application):
         self.manager = new_figure_manager_given_figure(id(figure), figure)
 
         handlers = [(r'/_static/(.*)',tornado.web.StaticFileHandler,{'path': FigureManagerWebAgg.get_static_file_path()}),
-                    (r"/", self.MainHandler), 
+                    (r"/sin", self.MainHandler), 
                     (r"/ws", self.SocketHandler),
                     (r'/download.([a-z0-9.]+)', self.Download),
-                    ('/mpl.js', self.MplJs)]
+                    ('/mpl.js', self.MplJs),
+                    (r'/lines', self.LinesHandler)]
         settings = dict(
             cookie_secret="__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
             static_path=os.path.join(os.path.dirname(__file__), "static"),
-            xsrf_cookies=True,
+            xsrf_cookies=False,
         )
         super(Application, self).__init__(handlers, **settings)
 
@@ -62,6 +63,20 @@ class Application(tornado.web.Application):
             ws_uri = "ws://{req.host}/".format(req=self.request) + "ws"
             # chat = {"ws_uri": ws_uri, "fig_id": manager.num}
             self.render("index.html", ws_uri=ws_uri, fig_id=manager.num)
+
+    class LinesHandler(tornado.web.RequestHandler):
+        def get(self):
+            manager = self.application.manager
+            ws_uri = "ws://{req.host}/".format(req=self.request) + "ws"
+            self.render("lines.html", ws_uri=ws_uri, fig_id=manager.num)
+
+        def post(self):
+            account=self.get_argument('account')
+            passwd=self.get_argument('passwd')
+            print(account)
+            print(passwd)
+            self.render("demo.html")
+            # self.redirect('demo.html')
 
     class SocketHandler(tornado.websocket.WebSocketHandler):
         supports_binary = True
