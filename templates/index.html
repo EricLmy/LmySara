@@ -1,29 +1,31 @@
-{% load static %}
-<!DOCTYPE html>
 <html>
-<head>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/page.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/boilerplate.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/fbm.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'jquery/css/themes/base/jquery-ui.min.css' %}">
-	<script src="{% static 'jquery/js/jquery-1.11.3.min.js' %}"></script>
-	<script src="{% static 'jquery/js/jquery-ui.min.js' %}"></script>
-	<script src="{% static 'mpl.js' %}"></script>
-	<script>
+  <head>
+    <link rel="stylesheet" href="_static/css/page.css" type="text/css">
+    <link rel="stylesheet" href="_static/css/boilerplate.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/fbm.css" type="text/css" />
+    <link rel="stylesheet" href="_static/jquery/css/themes/base/jquery-ui.min.css" >
+    <script src="_static/jquery/js/jquery-1.11.3.min.js"></script>
+    <script src="_static/jquery/js/jquery-ui.min.js"></script>
+    <script src="mpl.js"></script>
+    <!-- <script src="_static/js/mpl.js"></script> -->
+
+    <script>
       /* This is a callback that is called when the user saves
          (downloads) a file.  Its purpose is really to map from a
          figure and file format to a url in the application. */
       function ondownload(figure, format) {
-        // window.open('download.' + format, '_blank');
+        window.open('download.' + format, '_blank');
       };
+
       $(document).ready(
         function() {
           /* It is up to the application to provide a websocket that the figure
              will use to communicate to the server.  This websocket object can
              also be a "fake" websocket that underneath multiplexes messages
              from multiple figures, if necessary. */
-          // var websocket_type = mpl.get_websocket_type();
-          var websocket = 0;
+          var websocket_type = mpl.get_websocket_type();
+          var websocket = new websocket_type("{{ ws_uri }}");
+
           // mpl.figure creates a new figure on the webpage.
           var fig = new mpl.figure(
               // A unique numeric identifier for the figure
@@ -37,11 +39,13 @@
         }
       );
     </script>
-	<title>LmySara</title>
-</head>
-<body>
-	<h1>nihao .微量元素111</h1>
-	<div id="figure">
+
+    <title>matplotlib</title>
+  </head>
+
+  <body>
+    <h1>matplotlib</h1>
+    <div id="figure">
     </div>
-</body>
+  </body>
 </html>
